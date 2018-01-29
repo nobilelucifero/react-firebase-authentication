@@ -6,6 +6,7 @@ import {
 
 import { auth, db } from '../../firebase';
 import * as routes from '../../constants/routes';
+// import { emailToUsername } from '../../constants/helpers';
 
 const SignUpPage = ({ history }) =>
   <div>
@@ -17,7 +18,11 @@ const updateByPropertyName = (propertyName, value) => () => ({
   [propertyName]: value,
 });
 
+const emailToUsername = (value) =>
+  value.replace(/^(.+)@(.+)$/g,'$1').replace(/\./g, '').toLowerCase()
+
 const INITIAL_STATE = {
+  fullname: '',
   username: '',
   email: '',
   passwordOne: '',
@@ -34,7 +39,7 @@ class SignUpForm extends Component {
 
   onSubmit = (event) => {
     const {
-      username,
+      fullname,
       email,
       passwordOne,
     } = this.state;
@@ -46,8 +51,10 @@ class SignUpForm extends Component {
     auth.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
 
+        const username = emailToUsername(email)
+
         // Create a user in your own accessible Firebase Database too
-        db.doCreateUser(authUser.uid, username, email)
+        db.doCreateUser(authUser.uid, username, email, fullname)
           .then(() => {
             this.setState(() => ({ ...INITIAL_STATE }));
             history.push(routes.HOME);
@@ -66,7 +73,7 @@ class SignUpForm extends Component {
 
   render() {
     const {
-      username,
+      fullname,
       email,
       passwordOne,
       passwordTwo,
@@ -76,14 +83,14 @@ class SignUpForm extends Component {
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      username === '' ||
+      fullname === '' ||
       email === '';
 
     return (
       <form onSubmit={this.onSubmit}>
         <input
-          value={username}
-          onChange={event => this.setState(updateByPropertyName('username', event.target.value))}
+          value={fullname}
+          onChange={event => this.setState(updateByPropertyName('fullname', event.target.value))}
           type="text"
           placeholder="Full Name"
         />
@@ -117,7 +124,7 @@ class SignUpForm extends Component {
 
 const SignUpLink = () =>
   <p>
-    Don't have an account?
+    No account yet?
     {' '}
     <Link to={routes.SIGN_UP}>Sign Up</Link>
   </p>

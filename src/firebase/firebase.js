@@ -1,21 +1,28 @@
 import * as firebase from 'firebase';
 
+const REACT_APP_YOUR_API_KEY="AIzaSyCMmg1YlJEpcvkE7sFJ4C0ebOH6tVlYk-Y"
+const REACT_APP_YOUR_AUTH_DOMAIN="alsofyi-42ef8.firebaseapp.com"
+const REACT_APP_YOUR_DATABASE_URL="https://alsofyi-42ef8.firebaseio.com"
+const REACT_APP_YOUR_PROJECT_ID="alsofyi-42ef8"
+const REACT_APP_YOUR_STORAGE_BUCKET="alsofyi-42ef8.appspot.com"
+const REACT_APP_YOUR_MESSAGING_SENDER_ID="893535959878"
+
 const prodConfig = {
-  apiKey: YOUR_API_KEY,
-  authDomain: YOUR_AUTH_DOMAIN,
-  databaseURL: YOUR_DATABASE_URL,
-  projectId: YOUR_PROJECT_ID,
-  storageBucket: '',
-  messagingSenderId: YOUR_MESSAGING_SENDER_ID,
+  apiKey: REACT_APP_YOUR_API_KEY,
+  authDomain: REACT_APP_YOUR_AUTH_DOMAIN,
+  databaseURL: REACT_APP_YOUR_DATABASE_URL,
+  projectId: REACT_APP_YOUR_PROJECT_ID,
+  storageBucket: REACT_APP_YOUR_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_YOUR_MESSAGING_SENDER_ID,
 };
 
 const devConfig = {
-  apiKey: YOUR_API_KEY,
-  authDomain: YOUR_AUTH_DOMAIN,
-  databaseURL: YOUR_DATABASE_URL,
-  projectId: YOUR_PROJECT_ID,
-  storageBucket: '',
-  messagingSenderId: YOUR_MESSAGING_SENDER_ID,
+  apiKey: REACT_APP_YOUR_API_KEY,
+  authDomain: REACT_APP_YOUR_AUTH_DOMAIN,
+  databaseURL: REACT_APP_YOUR_DATABASE_URL,
+  projectId: REACT_APP_YOUR_PROJECT_ID,
+  storageBucket: REACT_APP_YOUR_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_YOUR_MESSAGING_SENDER_ID,
 };
 
 const config = process.env.NODE_ENV === 'production'
