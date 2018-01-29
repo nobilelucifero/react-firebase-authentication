@@ -1,32 +1,38 @@
 import React, { Component } from 'react';
+// import { browserHistory } from 'react-router-dom';
 import { db } from '../../firebase';
+
 
 export default class ProfilePage extends Component {
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  constructor() {
+    super();
+    // super(props);
 
     this.state = {
       loading: true,
       user:{
-          email: "placeholder"
+          email: "placeholder@example.com",
+          username: "…"
         }
     };
   }
 
   componentDidMount() {
-    const uid = this.props.match.params.id
-    console.log('UID:', uid);
+    const id = this.props.match.params.id
+    console.log('UID:', id);
 
-    db.getUser(uid).then(data =>
+    db.getUserByUsername(id).then(data =>
       this.getProfileInfo(data)
       // this.setState(() => ({ user: results.val() }))
     );
   }
 
   getProfileInfo(data) {
-    console.log(data.val())
-    this.setState({loading: false, user: data.val()})
+    // TODO: ugly!
+    const userData = data.val()[Object.keys(data.val())[0]]
+    this.setState({loading: false, user: userData})
   }
 
   render () {
@@ -34,8 +40,8 @@ export default class ProfilePage extends Component {
     return (
       !loading &&
       <div>
-        <h1>Profile of {user.email}!!!</h1>
-        <p>Helloooo!</p>
+        <h1>Profile of {user.username}!!!</h1>
+        <p>Hello {user.email}</p>
       </div>
     )
   }
